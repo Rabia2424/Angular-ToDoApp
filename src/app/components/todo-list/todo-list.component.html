@@ -1,0 +1,37 @@
+<div id="app">
+    <header>
+      <h1>📝 ToDo List App</h1>
+    </header>
+
+    <form id="add-form">
+      <input [(ngModel)]="text" (keyup.enter)="addToList()" name="todoItem" type="text" placeholder="Complete..." required autofocus />
+      <button [class]="getClass()" (click)="addToList()" title="Add">➕</button>
+    </form>
+   
+
+    <div id="show-radios">
+      <input (click)="getItems('')" type="radio" value="all" [checked]="isSelectedFilter('')"/>
+      <input (click)="getItems('done')" type="radio" value="done" [checked]="isSelectedFilter('done')"/>
+      <input (click)="getItems('undone')" type="radio" value="undone" [checked]="isSelectedFilter('undone')"/>
+    </div>
+    <!-- <div class="form-check">
+        <input [(ngModel)]="displayAll" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Default checkbox
+        </label>
+      </div> -->
+
+    <ul id="list">
+      <li [class]="{'done':todo.action}" *ngFor="let todo of getItems(filter)">
+        <button (click)="toggleAction(todo); onItemsChanged(todo)" class="done-button"></button>
+        <span>{{todo.description}}</span>
+        <button (click)="removeItem(todo)" class="remove-button"></button>
+      </li>
+      <!-- <li class="done">
+        <button class="done-button"></button>
+        <span>Sample Task 2</span>
+        <button class="remove-button"></button>
+      </li> -->
+    </ul>
+
+  </div>
